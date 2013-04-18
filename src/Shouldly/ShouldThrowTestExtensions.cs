@@ -7,7 +7,7 @@ namespace Shouldly
     [ShouldlyMethods]
     public static class Should
     {
-        public static TException Throw<TException>(Action actual) where TException : Exception
+        public static TException Throw<TException>(Action actual, string explaination = null) where TException : Exception
         {
             try
             {
@@ -19,13 +19,13 @@ namespace Shouldly
             }
             catch (Exception e)
             {
-                throw new ChuckedAWobbly(new ShouldlyMessage(typeof(TException), e.GetType()).ToString());
+                throw new ChuckedAWobbly(new ShouldlyMessage(typeof(TException), e.GetType()).ToString(), explaination);
             }
 
-            throw new ChuckedAWobbly(new ShouldlyMessage(typeof(TException)).ToString());
+            throw new ChuckedAWobbly(new ShouldlyMessage(typeof(TException)).ToString(), explaination);
         }
 
-        public static void NotThrow(Action action)
+        public static void NotThrow(Action action, string explaination = null)
         {
             try
             {
@@ -33,7 +33,7 @@ namespace Shouldly
             }
             catch (Exception ex)
             {
-                throw new ChuckedAWobbly(new ShouldlyMessage(ex.GetType()).ToString());
+                throw new ChuckedAWobbly(new ShouldlyMessage(ex.GetType()).ToString(), explaination);
             }
         }
     }

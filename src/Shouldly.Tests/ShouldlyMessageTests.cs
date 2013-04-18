@@ -17,6 +17,11 @@ namespace Shouldly.Tests
             );
 
             Should.Error(
+                () => "expected".ShouldBe("actual", "this is a test of explanation"),
+                "() => \"expected\" should be \"actual\" but was \"expected\"\nExplination: this is a test of explanation"
+            );
+
+            Should.Error(
                 () => 2.ShouldBe(1),
                 "() => 2 should be 1 but was 2"
             );
@@ -60,7 +65,7 @@ namespace Shouldly.Tests
             Should.Error(a,
                 "Action a = () => 1 should be 2 but was 1");
 
-            Expression<Action> lambda = () => 1.ShouldBe(2);
+            Expression<Action> lambda = () => 1.ShouldBe(2, null);
             Should.Error(lambda.Compile(),
             "The provided expression should be 2 but was 1");
         }

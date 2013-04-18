@@ -10,7 +10,7 @@ namespace Shouldly.Tests
             Shouldly.Should.Throw<ChuckedAWobbly>(action).Message.ShouldContainWithoutWhitespace(errorMessage);
         }
 
-        public static void NotError(Action action)
+        public static void NotError(Action action, string explaination = null)
         {
             try
             {
@@ -18,7 +18,7 @@ namespace Shouldly.Tests
             }
             catch (Exception ex)
             {
-                throw new ChuckedAWobbly(new ShouldlyMessage(ex.GetType()).ToString());
+                throw new ChuckedAWobbly(new ShouldlyMessage(ex.GetType()).ToString(), explaination);
             }
         }
     }
